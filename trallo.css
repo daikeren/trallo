@@ -1,0 +1,47 @@
+li {
+    list-style: none;
+    font-size: 16px;
+}
+
+li a {
+    float: right;
+    margin: 3px ;
+    font-size: 12px;
+}
+
+ul {
+    padding: 10px ;
+}
+
+h2 {
+    font-size: 18px ;
+}
+
+.list {
+    width: 300px ;
+    float: left;
+    padding: 2px 8px ;
+    background-color: #ddd ;
+    margin: 10px ;
+    border: 1px solid #666 ;
+    border-radius: 7px ;
+}
+
+.card {
+    cursor: move;
+    border-radius: 3px ;
+    border: 1px solid #666 ;
+    margin: 5px ;
+    padding: 4px ;
+    word-wrap: break-word;
+    background-color: white;
+}
+
+.card:hover {
+    -webkit-transform:rotate(2deg);
+    -o-transform:rotate(2deg);
+    -ms-transform:rotate(2deg);
+    -moz-transform:rotate(2deg);
+    transform:rotate(2deg);
+}
+
