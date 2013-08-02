@@ -1,7 +1,7 @@
 trallo
 ======
 
-Trello Clone using meteor
+Trello Clone using meteor. Live instance on [http://trallo.meteor.com](http://trallo.meteor.com)
 
 ## Usage:
 You need to have [Meteor](http://www.meteor.com/) installed.
