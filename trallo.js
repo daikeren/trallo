@@ -2,13 +2,13 @@ Cards = new Meteor.Collection("cards");
 
 if (Meteor.is_client) {
     Template.todo.helpers({
-        todos: Cards.find({status:'todo'}, {sort: {position: 1, task: 1}})
+        todoCards: Cards.find({status:'todo'}, {sort: {position: 1, task: 1}})
     });
     Template.doing.helpers({
-        doing: Cards.find({status:'doing'}, {sort: {position: 1, task: 1}})
+        doingCards: Cards.find({status:'doing'}, {sort: {position: 1, task: 1}})
     });
     Template.done.helpers({
-        done: Cards.find({status:'done'}, {sort: {position: 1, task: 1}})
+        doneCards: Cards.find({status:'done'}, {sort: {position: 1, task: 1}})
     });
     Template.board.events = {
         "click .edit": function() {
