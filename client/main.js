@@ -1,4 +1,5 @@
 Meteor.subscribe('cards');
+Meteor.subscribe('lists');
 
 Template.todo.helpers({
     todoCards: Cards.find({status:'todo'}, {sort: {position: 1, task: 1}})
