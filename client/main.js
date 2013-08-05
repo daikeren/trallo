@@ -67,7 +67,10 @@ Meteor.startup(function () {
             var cards = $this.sortable('toArray');
             var _status = $this.attr('id');
             for ( var i = 0 ; i < cards.length; i++) {
-                Cards.update({_id: cards[i]}, {$set: { status: _status, position: i+1 }});
+                Cards.update(
+                    {_id: cards[i]},
+                    {$set: { status: _status, position: i+1 }
+                });
             }
         },
         stop: function(event, ui) {
@@ -81,7 +84,15 @@ Meteor.startup(function () {
         helper: 'clone',
         update: function(event, ui) {
             var $this = $(this);
-
+            console.log($this);
+            var lists = $this.sortable('toArray');
+            console.log(lists);
+            for ( var i = 0 ; i < lists.length ; i++) {
+                Lists.update(
+                    {_id: lists[i].substring(1)},
+                    {$set: {order: i+1}}
+                );
+            }
         },
         stop: function(event, ui) {
 
