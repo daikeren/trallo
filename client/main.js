@@ -1,17 +1,17 @@
 Meteor.subscribe('cards');
 Meteor.subscribe('lists');
 
-Template.todo.helpers({
-    todoCards: Cards.find({status:'todo'}, {sort: {position: 1, task: 1}})
+Template.board.helpers({
+    lists: Lists.find({}, {sort: {order: 1}})
 });
 
-Template.doing.helpers({
-    doingCards: Cards.find({status:'doing'}, {sort: {position: 1, task: 1}})
-});
-
-Template.done.helpers({
-    doneCards: Cards.find({status:'done'}, {sort: {position: 1, task: 1}})
-});
+Template.list.cards = function(status) {
+    console.log(status);
+    return Cards.find(
+                {status: status},
+                {sort: {position: 1, task: 1}}
+            );
+};
 
 Template.board.events = {
     "click .edit": function() {

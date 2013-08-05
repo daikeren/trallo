@@ -1,5 +1,10 @@
 <template name="list">
-    {{#each cards }}
-    {{> card }}
-    {{/each }}
+    <div class="list">
+        <h2>{{ name }}</h2>
+        <ul id="{{ _id }}" class="list-area connectedSortable">
+        {{#each cards _id  }}
+            {{> card }}
+        {{/each }}
+        </ul>
+    </div>
 </template>
