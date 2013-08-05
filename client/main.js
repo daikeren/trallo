@@ -1,6 +1,49 @@
 Meteor.subscribe('cards');
 Meteor.subscribe('lists');
 
+function initialSortable() {
+    $('.board').sortable({
+        placeholder: 'ui-state-highlight',
+        helper: 'clone',
+        update: function(event, ui) {
+            console.log('.board update');
+            var $this = $(this);
+            var lists = $this.sortable('toArray');
+            for ( var i = 0 ; i < lists.length ; i++) {
+                Lists.update(
+                    {_id: lists[i].substring(1)},
+                    {$set: {order: i+1}}
+                );
+            }
+        },
+        stop: function(event, ui) {
+            console.log('.board stop');
+            initialSortable();
+        }
+    }).disableSelection();
+    $('ul').sortable({
+        connectWith: 'ul',
+        dropOnEmpty: true,
+        update: function(event, ui) {
+            var $this = $(this);
+            var cards = $this.sortable('toArray');
+            var _status = $this.attr('id');
+            for ( var i = 0 ; i < cards.length; i++) {
+                Cards.update(
+                    {_id: cards[i]},
+                    {$set: { status: _status, position: i+1 }
+                });
+            }
+        },
+        stop: function(event, ui) {
+            var parent = ui.item.parent();
+            var id = parent.attr('id');
+            $("#"+id).find("li[data-status!="+id+"]").remove();
+            initialSortable();
+        }
+    }).disableSelection();
+}
+
 Template.board.helpers({
     lists: Lists.find({}, {sort: {order: 1}})
 });
@@ -54,49 +97,29 @@ Template.board.events = {
             li_wrapper.html('<a class="add" href="#">Add a card</a>');
             return false;
         });
+    },
+    "click .add_list": function(event, template) {
+        if ( $('button').length > 0 ) {
+            return false ;
+        }
 
+        var list_wrapper = $(event.target).parent();
+        console.log(list_wrapper);
+        list_wrapper.html('<textarea></textarea><button>Save</button>');
+        $('button').on('click', function(){
+            var listName = $('textarea').val();
+            var length = Lists.find().count();
+            Lists.insert({
+                name: listName,
+                order: length + 1
+            });
+            list_wrapper('<h2><a class="add_list" href="#">Add a list</a></h2>')
+            return false;
+        });
     }
 };
 
 Meteor.startup(function () {
-    $('ul').sortable({
-        connectWith: 'ul',
-        dropOnEmpty: true,
-        update: function(event, ui) {
-            var $this = $(this);
-            var cards = $this.sortable('toArray');
-            var _status = $this.attr('id');
-            for ( var i = 0 ; i < cards.length; i++) {
-                Cards.update(
-                    {_id: cards[i]},
-                    {$set: { status: _status, position: i+1 }
-                });
-            }
-        },
-        stop: function(event, ui) {
-            var parent = ui.item.parent();
-            var id = parent.attr('id');
-            $("#"+id).find("li[data-status!="+id+"]").remove();
-        }
-    }).disableSelection();
-    $('.board').sortable({
-        placeholder: 'ui-state-highlight',
-        helper: 'clone',
-        update: function(event, ui) {
-            var $this = $(this);
-            console.log($this);
-            var lists = $this.sortable('toArray');
-            console.log(lists);
-            for ( var i = 0 ; i < lists.length ; i++) {
-                Lists.update(
-                    {_id: lists[i].substring(1)},
-                    {$set: {order: i+1}}
-                );
-            }
-        },
-        stop: function(event, ui) {
-
-        }
-    }).disableSelection();
+  initialSortable();
 });
 
