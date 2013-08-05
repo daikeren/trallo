@@ -1,25 +1,8 @@
 <template name="board">
-    <div class="list">
-        <h2>TODO</h2>
-        <ul id="todo" class="list-area connectedSortable">
-        {{> todo }}
-        <li data-status="todo"><a class="add" href="#">Add a card</a></li>
-        </ul>
-    </div>
-
-    <div class="list">
-        <h2>DOING</h2>
-        <ul id="doing" class="list-area connectedSortable">
-        {{> doing }}
-        <li data-status="doing"><a class="add" href="#">Add a card</a></li>
-        </ul>
-    </div>
-
-    <div class="list">
-        <h2>DONE</h2>
-        <ul id="done" class="list-area connectedSortable">
-        {{> done }}
-        <li data-status="done"><a class="add" href="#">Add a card</a></li>
-        </ul>
+    {{#each lists }}
+    {{> list}}
+    {{/each }}
+    <div class="list sortable">
+        <h2><a class="add_list" href="#">Add a list</a></h2>
     </div>
 </template>

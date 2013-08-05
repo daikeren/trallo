@@ -1,0 +1,11 @@
+<template name="list">
+    <div class="list sortable" id='L{{ _id }}'>
+        <h2>{{ name }}</h2>
+        <ul id="{{ _id }}" class="list-area connectedSortable">
+        {{#each cards _id  }}
+            {{> card }}
+        {{/each }}
+        <li data-status="{{ _id }}"><a class="add" href="#">Add a card</a></li>
+        </ul>
+    </div>
+</template>

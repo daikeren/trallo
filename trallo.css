@@ -45,3 +45,13 @@ h2 {
     transform:rotate(2deg);
 }
 
+.ui-state-highlight {
+    width: 300px ;
+    height: 300px ;
+    float: left;
+    padding: 2px 8px ;
+    background-color: #999 ;
+    margin: 10px ;
+    border: 1px solid #666 ;
+    border-radius: 7px ;
+}
