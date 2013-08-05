@@ -63,7 +63,7 @@ Meteor.startup(function () {
         connectWith: 'ul',
         dropOnEmpty: true,
         update: function(event, ui) {
-            var $this = $(this) ;
+            var $this = $(this);
             var cards = $this.sortable('toArray');
             var _status = $this.attr('id');
             for ( var i = 0 ; i < cards.length; i++) {
@@ -74,6 +74,17 @@ Meteor.startup(function () {
             var parent = ui.item.parent();
             var id = parent.attr('id');
             $("#"+id).find("li[data-status!="+id+"]").remove();
+        }
+    }).disableSelection();
+    $('.board').sortable({
+        placeholder: 'ui-state-highlight',
+        helper: 'clone',
+        update: function(event, ui) {
+            var $this = $(this);
+
+        },
+        stop: function(event, ui) {
+
         }
     }).disableSelection();
 });
