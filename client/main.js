@@ -105,6 +105,7 @@ Template.board.events = {
 
         var list_wrapper = $(event.target).parent();
         console.log(list_wrapper);
+        list_wrapper.addClass('ui-state-default');
         list_wrapper.html('<textarea></textarea><button>Save</button>');
         $('button').on('click', function(){
             var listName = $('textarea').val();
@@ -113,6 +114,7 @@ Template.board.events = {
                 name: listName,
                 order: length + 1
             });
+            list_wrapper.removeClass('ui-state-default');
             list_wrapper('<h2><a class="add_list" href="#">Add a list</a></h2>');
             return false;
         });
