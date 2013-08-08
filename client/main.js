@@ -115,7 +115,7 @@ Template.board.events = {
                 order: length + 1
             });
             list_wrapper.removeClass('ui-state-default');
-            list_wrapper('<h2><a class="add_list" href="#">Add a list</a></h2>');
+            list_wrapper.html('<h2><a class="add_list" href="#">Add a list</a></h2>');
             return false;
         });
     }
