@@ -113,7 +113,7 @@ Template.board.events = {
                 name: listName,
                 order: length + 1
             });
-            list_wrapper('<h2><a class="add_list" href="#">Add a list</a></h2>')
+            list_wrapper('<h2><a class="add_list" href="#">Add a list</a></h2>');
             return false;
         });
     }
