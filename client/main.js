@@ -9,18 +9,19 @@ function initialSortable() {
             console.log('.board update');
             var $this = $(this);
             var lists = $this.sortable('toArray');
-            for ( var i = 0 ; i < lists.length ; i++) {
+
+            _.each(lists, function(list, index){
                 Lists.update(
-                    {_id: lists[i].substring(1)},
-                    {$set: {order: i+1}}
+                    {_id: list.substring(1)},
+                    {$set: {order: index+1}}
                 );
-            }
+            });
         },
         stop: function(event, ui) {
-            console.log('.board stop');
             initialSortable();
         }
     }).disableSelection();
+
     $('ul').sortable({
         connectWith: 'ul',
         dropOnEmpty: true,
@@ -28,12 +29,12 @@ function initialSortable() {
             var $this = $(this);
             var cards = $this.sortable('toArray');
             var _status = $this.attr('id');
-            for ( var i = 0 ; i < cards.length; i++) {
+            _.each(cards, function(card, index){
                 Cards.update(
-                    {_id: cards[i]},
-                    {$set: { status: _status, position: i+1 }
-                });
-            }
+                    {_id: card},
+                    {$set: {status: _status, position: index + 1}}
+                );
+            });
         },
         stop: function(event, ui) {
             var parent = ui.item.parent();
@@ -128,4 +129,3 @@ Template.board.events = {
 Meteor.startup(function () {
   initialSortable();
 });
-
