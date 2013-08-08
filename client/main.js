@@ -84,15 +84,17 @@ Template.board.events = {
         li_wrapper.addClass('card ui-state-default');
         li_wrapper.html('<textarea></textarea><button>Save</button>');
         $('button').on('click', function(){
-            var _task = $('textarea').val();
+            var taskName = $('textarea').val();
             var _status = status;
-            console.log(_task);
+            console.log(taskName);
             var length = Cards.find({status: _status }).count();
-            Cards.insert({
-                task: _task,
-                status: _status,
-                position: length + 1
-            });
+            if ( $.trim(taskName).length !== 0) {
+                Cards.insert({
+                    task: taskName,
+                    status: _status,
+                    position: length + 1
+                });
+            }
             li_wrapper.removeClass('card ui-state-default');
             li_wrapper.html('<a class="add" href="#">Add a card</a>');
             return false;
@@ -110,10 +112,12 @@ Template.board.events = {
         $('button').on('click', function(){
             var listName = $('textarea').val();
             var length = Lists.find().count();
-            Lists.insert({
-                name: listName,
-                order: length + 1
-            });
+            if ( $.trim(listName).length !== 0) {
+                Lists.insert({
+                    name: listName,
+                    order: length + 1
+                });
+            }
             list_wrapper.removeClass('ui-state-default');
             list_wrapper.html('<h2><a class="add_list" href="#">Add a list</a></h2>');
             return false;
